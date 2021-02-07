@@ -16,29 +16,32 @@ const scene = new THREE.Scene();
 /**
  * Objects
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+// Make a group
+const group = new THREE.Group();
+group.rotation.set(Math.PI * 0.25, Math.PI * 0.25, 0, "XYZ");
+group.position.set(1.4, -1.3, 0.1);
+scene.add(group);
 
-// Position
-// mesh.position.x = 0.7;
-// mesh.position.y = -0.6;
-// mesh.position.z = 1;
-mesh.position.set(0.7, -0.6, 1);
+// Add some cubes
+const cube1 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+);
+cube1.position.x = -1.5;
+group.add(cube1);
 
-// Scale
-// mesh.scale.x = 0.2;
-// mesh.scale.y = 1;
-// mesh.scale.z = 2;
-mesh.scale.set(0.2, 1, 2);
+const cube2 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+);
+group.add(cube2);
 
-// Rotation
-// mesh.rotation.reorder("YXZ");
-// mesh.rotation.x = 0;
-// mesh.rotation.y = 1;
-// mesh.rotation.z = 0.2;
-mesh.rotation.set(Math.PI * 0, Math.PI * 0.35, Math.PI * -0.1, "YXZ");
+const cube3 = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0x0000ff })
+);
+cube3.position.x = 1.5;
+group.add(cube3);
 
 // Axes helper
 const axesHelper = new THREE.AxesHelper(1.5);
@@ -48,12 +51,11 @@ scene.add(axesHelper);
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-// camera.position.z = 3;
-camera.position.set(0.2, 0.3, 3);
+camera.position.set(0, 0, 3);
 scene.add(camera);
 
-camera.lookAt(mesh.position);
-console.log(mesh.position.distanceTo(camera.position));
+// Look at our group's position
+camera.lookAt(group.position);
 
 /**
  * Renderer
