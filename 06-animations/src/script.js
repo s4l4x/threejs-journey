@@ -1,5 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
+import gsap from "gsap";
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -31,6 +32,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 
 // Animations
+gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 });
 const clock = new THREE.Clock();
 const tick = () => {
   // Time
