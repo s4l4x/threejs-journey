@@ -1,2 +1,4 @@
 # threejs-journey
-Learning threejs 
+
+Learning threejs by Bruno Simon
+https://threejs-journey.com
