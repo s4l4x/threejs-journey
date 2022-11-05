@@ -20,15 +20,15 @@ scene.add(axes);
 /**
  * Debug
  */
-const PARAMS = {
+const params = {
   presetId: "",
   presetJson: "",
   color: "#ff0055",
+  spin: () => console.log("spin"),
 };
 
-const pane = new Pane({});
+const pane = new Pane();
 pane.registerPlugin(EssentialsPlugin);
-
 const tabs = pane.addTab({
   pages: [{ title: "Parameters" }, { title: "Presets" }],
 });
@@ -36,7 +36,7 @@ const paramsTab = tabs.pages[0];
 const presetsTab = tabs.pages[1];
 
 // Presets
-const PRESETS = {
+const presets = {
   atmos: {
     y: 1,
     color: "#11ffff",
@@ -44,7 +44,7 @@ const PRESETS = {
 };
 
 presetsTab
-  .addInput(PARAMS, "presetId", {
+  .addInput(params, "presetId", {
     label: "import",
     options: {
       "Choose Preset...": "",
@@ -52,8 +52,8 @@ presetsTab
     },
   })
   .on("change", (e) => {
-    const preset = PRESETS[e.value];
-    preset && ((PARAMS.presetId = ""), pane.importPreset(preset));
+    const preset = presets[e.value];
+    preset && ((params.presetId = ""), pane.importPreset(preset));
   });
 
 presetsTab
@@ -63,14 +63,14 @@ presetsTab
     console.log(preset);
   });
 
-presetsTab.addMonitor(PARAMS, "presetJson", {
+presetsTab.addMonitor(params, "presetJson", {
   label: "data",
   lineCount: 6,
   multiline: !0,
 });
 
 pane.on("change", () => {
-  PARAMS.presetJson = JSON.stringify(pane.exportPreset(), null, 2);
+  params.presetJson = JSON.stringify(pane.exportPreset(), null, 2);
 });
 
 // FPS Graph
@@ -96,7 +96,7 @@ function drawMess() {
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", positionsAttribute);
   const material = new THREE.MeshBasicMaterial({
-    color: PARAMS.color,
+    color: params.color,
     wireframe: true,
   });
   const mesh = new THREE.Mesh(geometry, material);
@@ -111,8 +111,13 @@ function drawMess() {
   });
   meshFolder.addInput(mesh.position, "y");
   meshFolder
-    .addInput(PARAMS, "color")
-    .on("change", () => mesh.material.color.set(PARAMS.color));
+    .addInput(params, "color")
+    .on("change", () => mesh.material.color.set(params.color));
+  meshFolder
+    .addButton({ title: "spin" })
+    .on("click", () =>
+      gsap.to(mesh.rotation, { duration: 1, y: mesh.rotation.y + Math.PI * 2 })
+    );
 }
 drawMess();
 
