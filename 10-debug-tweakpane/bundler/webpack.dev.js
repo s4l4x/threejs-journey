@@ -15,7 +15,7 @@ module.exports = merge(commonConfiguration, {
     contentBase: "./dist",
     watchContentBase: true,
     open: true,
-    https: true, // Set to true for file download
+    https: false, // Set to true for file download
     useLocalIp: true,
     disableHostCheck: true,
     overlay: true,
