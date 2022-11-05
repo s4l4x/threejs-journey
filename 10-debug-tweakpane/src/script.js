@@ -190,6 +190,12 @@ window.addEventListener("dblclick", () => {
   }
 });
 
+window.addEventListener("keydown", (event) => {
+  if (event.key === "h") {
+    pane.hidden = !pane.hidden;
+  }
+});
+
 /**
  * Animate
  */
