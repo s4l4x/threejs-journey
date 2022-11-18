@@ -54,6 +54,8 @@ gradientTexture.generateMipmaps = false;
 const matcapTexture = textureLoader.load("./textures/matcaps/6.png");
 
 // Cube Textures
+// SEE: https://polyhaven.com
+// SEE: https://matheowis.github.io/HDRI-to-CubeMap/
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager);
 const environmentMapTexture = cubeTextureLoader.load([
   "/textures/environmentMaps/0/px.jpg",
