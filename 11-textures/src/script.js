@@ -5,7 +5,60 @@ import gsap from "gsap";
 import { params } from "./constants.js";
 import { paramsTab, fpsGraph } from "./presets.js";
 
-// Setup
+/**
+ * Textures
+ */
+// Loading Manager
+const loadingManager = new THREE.LoadingManager();
+// loadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
+//   console.log(
+//     "Started loading file: " +
+//       url +
+//       "\nLoaded " +
+//       itemsLoaded +
+//       " of " +
+//       itemsTotal +
+//       " files."
+//   );
+// };
+loadingManager.onLoad = () => console.log("Loading complete!");
+loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+  console.log(
+    "Loading file: " +
+      url +
+      "\nLoaded " +
+      itemsLoaded +
+      " of " +
+      itemsTotal +
+      " files."
+  );
+};
+loadingManager.onError = function (url) {
+  console.log("There was an error loading " + url);
+};
+// Texture Loader
+const textureLoader = new THREE.TextureLoader(loadingManager);
+
+const aoTexture = textureLoader.load("./Door_Wood_001_ambientOcclusion.jpg");
+const colorTexture = textureLoader.load("./Door_Wood_001_basecolor.jpg");
+const heightTexture = textureLoader.load("./Door_Wood_001_height.png");
+const metallicTexture = textureLoader.load("./Door_Wood_001_metallic.jpg");
+const normalTexture = textureLoader.load("./Door_Wood_001_normal.jpg");
+const opacityTexture = textureLoader.load("./Door_Wood_001_opacity.jpg");
+const roughnessTexture = textureLoader.load("./Door_Wood_001_roughness.jpg");
+
+colorTexture.repeat.x = 2;
+colorTexture.repeat.y = 3;
+colorTexture.wrapS = THREE.MirroredRepeatWrapping;
+colorTexture.wrapT = THREE.RepeatWrapping;
+
+// colorTexture.generateMipmaps = false;
+// colorTexture.minFilter = THREE.NearestFilter;
+colorTexture.magFilter = THREE.NearestFilter;
+
+/**
+ * Setup
+ */
 const canvas = document.querySelector("canvas.webgl");
 const sizes = { width: window.innerWidth, height: window.innerHeight };
 const cursor = { x: 0, y: 0 };
@@ -20,7 +73,7 @@ scene.add(axes);
 // Objects
 const geometry = new THREE.BoxBufferGeometry();
 const material = new THREE.MeshBasicMaterial({
-  color: params.color,
+  map: colorTexture,
   wireframe: false,
 });
 const mesh = new THREE.Mesh(geometry, material);
