@@ -1,0 +1,48 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", "Arial";
+}
+
+button {
+  user-select: none;
+  width: fit-content;
+  padding: 1em 1.3em;
+  border-radius: 999px;
+  border: none;
+  background-color: #e4ab9b;
+  box-shadow: 0 4px 16px #e4ab9baa;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+hr {
+  width: 100%;
+}
+
+.App {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #efefef;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.appPanel {
+  width: 500px;
+  height: 500px;
+  padding: 32px;
+  border-radius: 32px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

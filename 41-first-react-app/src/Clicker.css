@@ -1,0 +1,9 @@
+.Clicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clickerP {
+  margin: 0;
+}
