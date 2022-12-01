@@ -37,8 +37,10 @@ fontLoader.load("/fonts/Wizardry_Night_Regular.json", (font) => {
 /**
  * Objects
  */
-const axesHelper = new THREE.AxesHelper();
-scene.add(axesHelper);
+if (process.env.NODE_ENV !== "production") {
+  const axesHelper = new THREE.AxesHelper();
+  scene.add(axesHelper);
+}
 
 // Text
 const drawText = (font) => {
