@@ -8,6 +8,7 @@ import { DirectionalLight } from "./Lights/DirectionalLight.js";
 import { PointLight } from "./Lights/PointLight.js";
 import { SpotLight } from "./Lights/SpotLight.js";
 import { HemisphereLight } from "./Lights/HemisphereLight.js";
+import { RectAreaLight } from "./Lights/RectAreaLight.js";
 
 /**
  * Base
@@ -50,6 +51,16 @@ const params = {
     groundColor: "rgb(94, 159, 122)",
     position: { x: 1, y: 2.2, z: 0.5 },
   },
+  rectAreaLight: {
+    expanded: true,
+    showHelper: true,
+    color: "rgb(134, 115, 106)",
+    intensity: 2.0,
+    width: 1.5,
+    height: 2,
+    position: { x: -1.5, y: 0, z: 2.1 },
+    lookAt: { x: -1, y: 0, z: 0 },
+  },
 };
 
 // Setup
@@ -65,6 +76,7 @@ new DirectionalLight(scene, pane, params.directionalLight);
 new PointLight(scene, pane, params.pointLight);
 new SpotLight(scene, pane, params.spotLight);
 new HemisphereLight(scene, pane, params.hemisphereLight);
+new RectAreaLight(scene, pane, params.rectAreaLight);
 
 // const rectAreaLight = new THREE.RectAreaLight(0xffffaf, 2.0, 1.5, 2);
 // rectAreaLight.position.set(-1.5, 0, 2.1);
