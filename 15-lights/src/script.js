@@ -7,6 +7,7 @@ import * as TweakpaneRotationInputPlugin from "@0b5vr/tweakpane-plugin-rotation"
 import { DirectionalLight } from "./Lights/DirectionalLight.js";
 import { PointLight } from "./Lights/PointLight.js";
 import { SpotLight } from "./Lights/SpotLight.js";
+import { HemisphereLight } from "./Lights/HemisphereLight.js";
 
 /**
  * Base
@@ -40,6 +41,14 @@ const params = {
   },
   spot: { x: -0.5, y: 1.4, z: 3.6 },
   spotTarget: { x: 0.5, y: -1.4, z: -1.0 },
+  hemisphereLight: {
+    expanded: false,
+    showHelper: false,
+    intensity: 0.8,
+    color: "rgb(134, 115, 106)",
+    groundColor: "rgb(94, 159, 122)",
+    position: { x: 1, y: 2.2, z: 0.5 },
+  },
 };
 
 // Setup
@@ -62,24 +71,11 @@ const pointLight = new PointLight(scene, pane, params.pointLight);
 
 const spotLight = new SpotLight(scene, pane, params.spotLight);
 
-const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3);
-scene.add(hemisphereLight);
+new HemisphereLight(scene, pane, params.hemisphereLight);
 
 // const rectAreaLight = new THREE.RectAreaLight(0xffffaf, 2.0, 1.5, 2);
 // rectAreaLight.position.set(-1.5, 0, 2.1);
 // scene.add(rectAreaLight);
-
-/**
- * Debug
- */
-// Debug Helpers
-// const hemisphereLightHelper = new THREE.HemisphereLightHelper(
-//   hemisphereLight,
-//   0.1
-// );
-// scene.add(hemisphereLightHelper);
-
-// Debug GUI
 
 /**
  * Objects
