@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 export class PointLight {
-  // params: { showHelper, intensity, color, position }
+  // params: { expanded, showHelper, intensity, color, position }
   constructor(scene, pane, params) {
     this.scene = scene;
     this.pane = pane;
@@ -31,7 +31,7 @@ export class PointLight {
 
     const folder = this.pane.addFolder({
       title: "Point Light",
-      expanded: true,
+      expanded: this.params.expanded,
     });
     folder
       .addInput(this.params, "showHelper", { label: "helper" })

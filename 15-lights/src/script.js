@@ -17,18 +17,21 @@ const pane = new Pane();
 pane.registerPlugin(TweakpaneRotationInputPlugin);
 const params = {
   directionalLight: {
+    expanded: false,
     showHelper: false,
     quat: { x: 0.33, y: 0.04, z: -0.74, w: -0.58 },
     intensity: 0.3,
     color: "rgb(208, 210, 8)",
   },
   pointLight: {
+    expanded: false,
     showHelper: false,
     intensity: 0.4,
     color: "rgb(190, 140, 36)",
     position: { x: 1, y: 2.2, z: 0.5 },
   },
   spotLight: {
+    expanded: false,
     showHelper: false,
     intensity: 0.4,
     color: "rgb(190, 140, 36)",
@@ -39,8 +42,6 @@ const params = {
     penumbra: 0.1, // Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and 1. Default is zero.
     decay: 1, // The amount the light dims along the distance of the light.
   },
-  spot: { x: -0.5, y: 1.4, z: 3.6 },
-  spotTarget: { x: 0.5, y: -1.4, z: -1.0 },
   hemisphereLight: {
     expanded: false,
     showHelper: false,
@@ -60,17 +61,9 @@ const scene = new THREE.Scene();
  */
 const ambientLight = new THREE.AmbientLight(0xffaaab, 0.01);
 scene.add(ambientLight);
-
-const directionalLight = new DirectionalLight(
-  scene,
-  pane,
-  params.directionalLight
-);
-
-const pointLight = new PointLight(scene, pane, params.pointLight);
-
-const spotLight = new SpotLight(scene, pane, params.spotLight);
-
+new DirectionalLight(scene, pane, params.directionalLight);
+new PointLight(scene, pane, params.pointLight);
+new SpotLight(scene, pane, params.spotLight);
 new HemisphereLight(scene, pane, params.hemisphereLight);
 
 // const rectAreaLight = new THREE.RectAreaLight(0xffffaf, 2.0, 1.5, 2);

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 export class SpotLight {
-  // params: { showHelper, intensity, color, position, targetPosition }
+  // params: { expanded, showHelper, intensity, color, position, targetPosition, ... }
   constructor(scene, pane, params) {
     this.scene = scene;
     this.pane = pane;
@@ -41,7 +41,7 @@ export class SpotLight {
 
     const folder = this.pane.addFolder({
       title: "Spot Light",
-      expanded: true,
+      expanded: this.params.expanded,
     });
 
     folder

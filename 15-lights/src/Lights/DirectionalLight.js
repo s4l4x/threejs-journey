@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 export class DirectionalLight {
-  // params: { showHelper, quat, intensity, color }
+  // params: { expanded, showHelper, quat, intensity, color }
   constructor(scene, pane, params) {
     this.scene = scene;
     this.pane = pane;
@@ -39,7 +39,7 @@ export class DirectionalLight {
 
     const folder = this.pane.addFolder({
       title: "Directional Light",
-      expanded: true,
+      expanded: this.params.expanded,
     });
     folder
       .addInput(this.params, "showHelper", { label: "helper" })
